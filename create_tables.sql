@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS Music (
     Gender varchar(200)
 );
 
-CREATE TABLE IF NOT EXISTS _User (
+CREATE TABLE IF NOT EXISTS SpotifyUser (
     Email varchar(200) PRIMARY KEY,
     UserName varchar(200),
     Birth date,
@@ -28,13 +28,12 @@ CREATE TABLE IF NOT EXISTS Payment (
     PaymentMonth INT,
     PaymentYear INT,
     CardNumber INT REFERENCES PaymentCard(CardNumber),
-    Email varchar(200) REFERENCES _User(Email)
+    Email varchar(200) REFERENCES SpotifyUser(Email)
 );
 
-CREATE TABLE IF NOT EXISTS UserPermissions (
-    FriendsID INT PRIMARY KEY,
-    Email varchar(200),
-    PaymentID INT,
-    CONSTRAINT amigo1 FOREIGN KEY (Email) REFERENCES _User(Email),
-    CONSTRAINT amigo2 FOREIGN KEY (PaymentID) REFERENCES Payment(ID)
+CREATE TABLE Friends (
+    Email1 varchar(200) REFERENCES SpotifyUser(Email),
+    Email2 varchar(200) REFERENCES SpotifyUser(Email),
+    PRIMARY KEY(Email1, Email2)
 );
+    
